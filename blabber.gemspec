@@ -1,0 +1,12 @@
+Gem::Specification.new do |s|
+  s.name        = 'blabber'
+  s.version     = '0.1.3'
+  s.date        = '2013-07-15'
+  s.summary     = "Redirect console messages to other places!"
+  s.description = "Redirect console messages to other places."
+  s.authors     = ["Paul Picazo"]
+  s.email       = 'ppicazo@gmail.com'
+  s.files       = ["lib/blabber.rb"]
+  s.homepage    = 'https://github.com/ppicazo/blabber'
+  s.add_dependency('broach', ["~> 0.3.0"])
+end

@@ -1,62 +1,43 @@
+require 'blabber/campfire'
+
 module Blabber
   
   class Blabber
 
-    require "broach"
-
-    @@settings = {}
-
     @@level = { "DEBUG" => 0, "INFO" => 1, "WARN" => 2, "ERROR" => 3}
 
-    def initialize(account, token, room, loglevel)
+    def initialize(opts)
 
-      if account.nil? || token.nil? || room.nil? || loglevel.nil?
-        @@settings = { "campfire" => { "enabled" => false } }
-      else
-        @@settings = {
-          "campfire" => {
-            "enabled" => true,
-            "account" => account,
-            "token" => token,
-            "room" => room,
-            "loglevel" => loglevel
-          }
-        }
-
-        Broach.settings = {
-          'account' => @@settings['campfire']['account'],
-          'token'   => @@settings['campfire']['token'],
-          'use_ssl' => true
-        }
-      end
+        @@opts = opts
+        @@campfire = @@opts['campfire'] && Campfire.new(@@opts['campfire'])
 
     end
 
     def debug(message)
       console message
-      if @@settings['campfire']['enabled'] && loglevelnumeric <= @@level['DEBUG']
-        speak(message)
+      if @@campfire && loglevelnumeric <= @@level['DEBUG']
+        @@campfire.speak(message)
       end
     end
 
     def info(message)
       console message
-      if @@settings['campfire']['enabled'] && loglevelnumeric <= @@level['INFO']
-        speak(message)
+      if @@campfire && loglevelnumeric <= @@level['INFO']
+        @@campfire.speak(message)
       end
     end
 
     def warn(message)
       console message
-      if @@settings['campfire']['enabled'] && loglevelnumeric <= @@level['WARN']
-        speak(message)
+      if @@campfire && loglevelnumeric <= @@level['WARN']
+        @@campfire.speak(message)
       end
     end
 
     def error(message)
       console message
-      if @@settings['campfire']['enabled'] && loglevelnumeric <= @@level['ERROR']
-        speak(message)
+      if @@campfire && loglevelnumeric <= @@level['ERROR']
+        @@campfire.speak(message)
       end
     end
 
@@ -64,17 +45,8 @@ module Blabber
       puts message
     end
 
-    def speak(message)
-      opts = {}
-      if message.gsub(/\n|\r/, "") != message
-        opts[:type] = :paste
-      end
-
-      Broach.speak(@@settings['campfire']['room'], message, opts)
-    end
-
     def loglevelnumeric()
-      case @@settings['campfire']['loglevel']
+      case @@opts['campfire']['loglevel']
       when "DEBUG"
         return 0
       when "INFO"

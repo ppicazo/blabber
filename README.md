@@ -14,7 +14,13 @@ $ gem install blabber
 ```ruby
 require "blabber"
 
-blabber = Blabber::Blabber.new('campfireaccount', 'abc123', 'My Room', 'DEBUG')
+blabber = Blabber::Blabber.new(
+    'campfire' => {
+        'account' => 'campfireaccount', 
+        'token' => 'abc123', 
+        'room' => 'My Room',
+        'loglevel' => 'DEBUG'
+    })
 
 blabber.debug("debug msg")
 blabber.info("info msg")

@@ -8,36 +8,36 @@ module Blabber
 
     def initialize(opts)
 
-        @@opts = opts
-        @@campfire = @@opts['campfire'] && Campfire.new(@@opts['campfire'])
+        @opts = opts
+        @campfire = @opts['campfire'] && Campfire.new(@opts['campfire'])
 
     end
 
     def debug(message)
       console message
-      if @@campfire && loglevelnumeric <= @@level['DEBUG']
-        @@campfire.speak(message)
+      if @campfire && loglevelnumeric <= @@level['DEBUG']
+        @campfire.speak(message)
       end
     end
 
     def info(message)
       console message
-      if @@campfire && loglevelnumeric <= @@level['INFO']
-        @@campfire.speak(message)
+      if @campfire && loglevelnumeric <= @@level['INFO']
+        @campfire.speak(message)
       end
     end
 
     def warn(message)
       console message
-      if @@campfire && loglevelnumeric <= @@level['WARN']
-        @@campfire.speak(message)
+      if @campfire && loglevelnumeric <= @@level['WARN']
+        @campfire.speak(message)
       end
     end
 
     def error(message)
       console message
-      if @@campfire && loglevelnumeric <= @@level['ERROR']
-        @@campfire.speak(message)
+      if @campfire && loglevelnumeric <= @@level['ERROR']
+        @campfire.speak(message)
       end
     end
 
@@ -46,7 +46,7 @@ module Blabber
     end
 
     def loglevelnumeric()
-      case @@opts['campfire']['loglevel']
+      case @opts['campfire']['loglevel']
       when "DEBUG"
         return 0
       when "INFO"

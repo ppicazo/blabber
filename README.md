@@ -15,8 +15,8 @@ $ gem install blabber
 require "blabber"
 
 blabber = Blabber::Blabber.new(
-    'console' => {'loglevel' => 'DEBUG'},
-    'campfire' => {
+    'Blabber::Console' => {'loglevel' => 'DEBUG'},
+    'Blabber::Campfire' => {
         'account' => 'campfireaccount', 
         'token' => 'abc123', 
         'room' => 'My Room',

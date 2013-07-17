@@ -2,18 +2,21 @@ require 'blabber/channel'
 
 module Blabber
   
-  class Campfire < Channel
+  class Campfire
 
+    include Channel
+    attr_reader :opts
+    
     require "broach"
 
     def initialize(opts)
-        @opts = opts
-        Broach.settings = @opts.keys.inject({'use_ssl' => true}) do |acc, key|
-            if(['account', 'token'].include?(key))
-                acc[key] = @opts[key]
-            end 
-            acc
-        end
+      @opts = opts
+      Broach.settings = @opts.keys.inject({'use_ssl' => true}) do |acc, key|
+        if(['account', 'token'].include?(key))
+          acc[key] = @opts[key]
+        end 
+        acc
+      end
     end
 
     def speak(message)

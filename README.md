@@ -15,11 +15,12 @@ $ gem install blabber
 require "blabber"
 
 blabber = Blabber::Blabber.new(
+    'console' => {'loglevel' => 'DEBUG'},
     'campfire' => {
         'account' => 'campfireaccount', 
         'token' => 'abc123', 
         'room' => 'My Room',
-        'loglevel' => 'DEBUG'
+        'loglevel' => 'INFO'
     })
 
 blabber.debug("debug msg")

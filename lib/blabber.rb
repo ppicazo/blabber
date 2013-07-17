@@ -1,3 +1,4 @@
+require 'blabber/console'
 require 'blabber/campfire'
 
 module Blabber
@@ -6,6 +7,7 @@ module Blabber
 
     def initialize(opts)
       @channels = []
+      opts['console'] && (@channels << Console.new(opts['console']))
       opts['campfire'] && (@channels << Campfire.new(opts['campfire']))
     end
 
@@ -26,14 +28,9 @@ module Blabber
     end
 
     def process_message(message, loglevel)
-      console message
       @channels.each do |channel|
         channel.emit(message, loglevel)
       end
-    end
-
-    def console(message)
-      puts message
     end
 
   end

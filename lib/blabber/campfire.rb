@@ -19,6 +19,10 @@ module Blabber
       end
     end
 
+    def loglevels
+      @opts['loglevels']
+    end
+    
     def speak(message, loglevel, opts)
       msg_opts = {}
       if message.gsub(/\n|\r/, "") != message

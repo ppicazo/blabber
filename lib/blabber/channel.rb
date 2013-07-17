@@ -2,7 +2,6 @@ module Blabber
 
   module Channel
 
-    @@loglevels = ["DEBUG", "INFO", "WARN", "ERROR"]
 
     def emit(message, loglevel, opts = nil)
      if should_emit(loglevel)
@@ -12,8 +11,7 @@ module Blabber
 
     private
     def should_emit(loglevel)
-      raise "Unknown log level #{loglevel}" unless @@loglevels.index(loglevel)
-      @@loglevels.index(opts['loglevel']) <= @@loglevels.index(loglevel)
+       loglevels.include?(loglevel)
     end
 
   end

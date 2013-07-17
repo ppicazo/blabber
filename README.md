@@ -24,20 +24,26 @@ class CustomConsole
     @opts = opts
   end
 
+  def loglevels
+    @opts['loglevels']
+  end
+
   def speak(message, loglevel, opts)
     puts "[#{loglevel}] #{message}"
   end
 
 end
 
+all_standard_loglevels = ['INFO', 'WARN', 'ERROR', 'DEBUG']
+
 blabber = Blabber::Blabber.new(
-    'Blabber::Console' => {'loglevel' => 'DEBUG'},
-    'CustomConsole' => {'loglevel' => 'DEBUG'},
+    'Blabber::Console' => {'loglevels' => all_standard_loglevels},
+    'CustomConsole' => {'loglevels' => ['INFO', 'WARN', 'ERROR']},
     'Blabber::Campfire' => {
         'account' => 'campfireaccount', 
         'token' => 'abc123', 
         'room' => 'My Room',
-        'loglevel' => 'INFO'
+        'loglevels' => ['INFO', 'WARN', 'ERROR', 'DEBUG', 'CAMPFIRE']
     })
 
 blabber.debug("debug msg")
@@ -45,4 +51,8 @@ blabber.info("info msg")
 blabber.error("error msg")
 blabber.warn("warn msg")
 blabber.debug("multiline\nmessage")
+blabber.campfire("just to campfire")
 ```
+
+### Credits
+@benfollis

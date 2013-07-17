@@ -11,7 +11,7 @@ module Blabber
       @opts = opts
     end
 
-    def speak(message)
+    def speak(message, loglevel, opts)
       puts message
     end
 

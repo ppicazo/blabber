@@ -19,7 +19,7 @@ module Blabber
       end
     end
 
-    def speak(message)
+    def speak(message, loglevel, opts)
       msg_opts = {}
       if message.gsub(/\n|\r/, "") != message
         msg_opts[:type] = :paste

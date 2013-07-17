@@ -14,25 +14,13 @@ module Blabber
       end
     end
 
-    def debug(message)
-      process_message(message, 'DEBUG')
-    end
+    def method_missing(method_name, *args)
+      process_message(args[0], method_name.to_s.upcase, args[1])
+    end 
 
-    def info(message)
-      process_message(message, 'INFO')
-    end
-
-    def warn(message)
-      process_message(message, 'WARN')
-    end
-
-    def error(message)
-      process_message(message, 'ERROR')
-    end
-
-    def process_message(message, loglevel)
+    def process_message(message, loglevel, opts)
       @channels.each do |channel|
-        channel.emit(message, loglevel)
+        channel.emit(message, loglevel, opts)
       end
     end
 

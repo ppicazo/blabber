@@ -4,9 +4,9 @@ module Blabber
 
     @@loglevels = ["DEBUG", "INFO", "WARN", "ERROR"]
 
-    def emit(message, loglevel)
+    def emit(message, loglevel, opts = nil)
      if should_emit(loglevel)
-       speak(message)
+       speak(message, loglevel, opts)
       end
     end
 

@@ -20,4 +20,5 @@ blabber.debug("debug msg")
 blabber.info("info msg")
 blabber.error("error msg")
 blabber.warn("warn msg")
+blabber.debug("multiline\nmessage")
 ```

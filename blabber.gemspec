@@ -8,6 +8,6 @@ Gem::Specification.new do |s|
   s.email       = 'ppicazo@gmail.com'
   s.files       = ["lib/blabber.rb"]
   s.homepage    = 'https://github.com/ppicazo/blabber'
-  s.license     = 'New BSD License
+  s.license     = 'New BSD License'
   s.add_dependency('broach', ["~> 0.3.0"])
 end

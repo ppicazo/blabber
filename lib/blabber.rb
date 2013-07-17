@@ -4,32 +4,31 @@ module Blabber
   
   class Blabber
 
-    @@level = { "DEBUG" => 0, "INFO" => 1, "WARN" => 2, "ERROR" => 3}
-
     def initialize(opts)
-        @campfire = opts['campfire'] && Campfire.new(opts['campfire'])
+      @channels = []
+      opts['campfire'] && (@channels << Campfire.new(opts['campfire']))
     end
 
     def debug(message)
-      processMessage(message, 'DEBUG')
+      process_message(message, 'DEBUG')
     end
 
     def info(message)
-      processMessage(message, 'INFO')
+      process_message(message, 'INFO')
     end
 
     def warn(message)
-      processMessage(message, 'WARN')
+      process_message(message, 'WARN')
     end
 
     def error(message)
-      processMessage(message, 'ERROR')
+      process_message(message, 'ERROR')
     end
 
-    def processMessage(message, loglevel)
+    def process_message(message, loglevel)
       console message
-      if @campfire && @campfire.loglevelnumeric <= @@level['ERROR']
-        @campfire.speak(message)
+      @channels.each do |channel|
+        channel.emit(message, loglevel)
       end
     end
 

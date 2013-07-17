@@ -2,17 +2,18 @@ module Blabber
 
   class Channel
 
-    def loglevelnumeric()
-      case @opts['loglevel']
-      when "DEBUG"
-        return 0
-      when "INFO"
-        return 1
-      when "WARN"
-        return 2
-      when "ERROR"
-        return 3
+    @@loglevels = ["DEBUG", "INFO", "WARN", "ERROR"]
+
+    def emit(message, loglevel)
+     if should_emit(loglevel)
+       speak(message)
       end
+    end    
+
+    private
+    def should_emit(loglevel)
+      raise "Unknown log level #{loglevel}" unless @@loglevels.index(loglevel)  
+      @@loglevels.index(@opts['loglevel']) <= @@loglevels.index(loglevel)
     end
 
   end

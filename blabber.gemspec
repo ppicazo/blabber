@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'blabber'
-  s.version     = '0.1.3'
+  s.version     = '0.1.4'
   s.date        = '2013-07-15'
   s.summary     = "Redirect console messages to other places!"
   s.description = "Redirect console messages to other places."

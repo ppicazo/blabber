@@ -65,7 +65,11 @@ module Blabber
     end
 
     def speak(message)
-      Broach.speak(@@settings['campfire']['room'], message)
+      if message.include? "\n"
+        Broach.speak(@@settings['campfire']['room'], message, :type => :paste)
+      else
+        Broach.speak(@@settings['campfire']['room'], message)
+      end
     end
 
     def loglevelnumeric()

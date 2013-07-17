@@ -1,88 +1,26 @@
+require 'blabber/console'
+require 'blabber/campfire'
+
 module Blabber
   
   class Blabber
 
-    require "broach"
-
-    @@settings = {}
-
-    @@level = { "DEBUG" => 0, "INFO" => 1, "WARN" => 2, "ERROR" => 3}
-
-    def initialize(account, token, room, loglevel)
-
-      if account.nil? || token.nil? || room.nil? || loglevel.nil?
-        @@settings = { "campfire" => { "enabled" => false } }
-      else
-        @@settings = {
-          "campfire" => {
-            "enabled" => true,
-            "account" => account,
-            "token" => token,
-            "room" => room,
-            "loglevel" => loglevel
-          }
-        }
-
-        Broach.settings = {
-          'account' => @@settings['campfire']['account'],
-          'token'   => @@settings['campfire']['token'],
-          'use_ssl' => true
-        }
-      end
-
-    end
-
-    def debug(message)
-      console message
-      if @@settings['campfire']['enabled'] && loglevelnumeric <= @@level['DEBUG']
-        speak(message)
+    def initialize(opts)
+      @channels = opts.keys.map do |channel_name|\
+        class_object = channel_name.split("::").inject(Object) do |acc, component|
+          acc.const_get(component)
+        end
+        class_object.new(opts[channel_name])
       end
     end
 
-    def info(message)
-      console message
-      if @@settings['campfire']['enabled'] && loglevelnumeric <= @@level['INFO']
-        speak(message)
-      end
-    end
+    def method_missing(method_name, *args)
+      process_message(args[0], method_name.to_s.upcase, args[1])
+    end 
 
-    def warn(message)
-      console message
-      if @@settings['campfire']['enabled'] && loglevelnumeric <= @@level['WARN']
-        speak(message)
-      end
-    end
-
-    def error(message)
-      console message
-      if @@settings['campfire']['enabled'] && loglevelnumeric <= @@level['ERROR']
-        speak(message)
-      end
-    end
-
-    def console(message)
-      puts message
-    end
-
-    def speak(message)
-      opts = {}
-      if message.gsub(/\n|\r/, "") != message
-        opts[:type] = :paste
-      end
-
-      Broach.speak(@@settings['campfire']['room'], message, opts)
-    end
-
-    def loglevelnumeric()
-      case @@settings['campfire']['loglevel']
-      when "DEBUG"
-        return 0
-      when "INFO"
-        return 1
-      when "WARN"
-        return 2
-      when "ERROR"
-        return 3
+    def process_message(message, loglevel, opts)
+      @channels.each do |channel|
+        channel.emit(message, loglevel, opts)
       end
     end
 

@@ -6,7 +6,7 @@ module Blabber
 
     include Channel
     attr_reader :opts
-    
+
     require "broach"
 
     def initialize(opts)

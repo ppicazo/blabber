@@ -8,14 +8,14 @@ module Blabber
      if should_emit(loglevel)
        speak(message)
       end
-    end    
+    end
 
     private
     def should_emit(loglevel)
-      raise "Unknown log level #{loglevel}" unless @@loglevels.index(loglevel)  
+      raise "Unknown log level #{loglevel}" unless @@loglevels.index(loglevel)
       @@loglevels.index(opts['loglevel']) <= @@loglevels.index(loglevel)
     end
 
   end
 
-end  
+end

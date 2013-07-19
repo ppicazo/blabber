@@ -36,10 +36,10 @@ end
 
 all_standard_loglevels = ['INFO', 'WARN', 'ERROR', 'DEBUG']
 
-blabber = Blabber::Blabber.new(
-    'Blabber::Console' => {'loglevels' => all_standard_loglevels},
-    'CustomConsole' => {'loglevels' => ['INFO', 'WARN', 'ERROR', 'PLATYPUS']}
-)
+blabber = Blabber::Blabber.new([
+    {'channel' => 'Blabber::Console', 'loglevels' => all_standard_loglevels},
+    {'channel' => 'CustomConsole', 'loglevels' => ['INFO', 'WARN', 'ERROR', 'PLATYPUS']}
+])
 
 blabber.debug("debug msg")
 blabber.info("info msg")

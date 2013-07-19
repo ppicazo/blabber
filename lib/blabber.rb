@@ -1,16 +1,17 @@
 require 'blabber/console'
-require 'blabber/campfire'
+require 'blabber/mock'
 
 module Blabber
   
   class Blabber
 
     def initialize(opts)
-      @channels = opts.keys.map do |channel_name|\
-        class_object = channel_name.split("::").inject(Object) do |acc, component|
+      @channels = Array.new
+      opts.each do |channel|\
+        class_object = channel["channel"].split("::").inject(Object) do |acc, component|
           acc.const_get(component)
         end
-        class_object.new(opts[channel_name])
+        @channels << class_object.new(channel)
       end
     end
 

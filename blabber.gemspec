@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.description = "Redirect console messages to other places."
   s.authors     = ["Paul Picazo"]
   s.email       = 'ppicazo@gmail.com'
-  s.files       = ["lib/blabber.rb", "lib/blabber/channel.rb", "lib/blabber/console.rb"]
+  s.files       = ["lib/blabber.rb", "lib/blabber/channel.rb", "lib/blabber/console.rb", "lib/blabber/mock.rb", "test/test_blabber.rb"]
   s.homepage    = 'https://github.com/ppicazo/blabber'
   s.license     = 'New BSD License'
 end

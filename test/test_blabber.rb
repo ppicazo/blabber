@@ -24,6 +24,7 @@ class TestBlabber < MiniTest::Test
       log2 = Log.new
 
       blabber = Blabber::Blabber.new([
+        {'channel' => 'Blabber::Console', 'loglevels' => ['ERROR', 'DEBUG', 'WHATWHAT']},
         {'channel' => 'Blabber::Mock', 'loglevels' => ['ERROR', 'DEBUG'], 'log' => log1},
         {'channel' => 'Blabber::Mock', 'loglevels' => ['ERROR', 'NOTDEBUG'], 'log' => log2}
       ])

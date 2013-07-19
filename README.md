@@ -38,13 +38,8 @@ all_standard_loglevels = ['INFO', 'WARN', 'ERROR', 'DEBUG']
 
 blabber = Blabber::Blabber.new(
     'Blabber::Console' => {'loglevels' => all_standard_loglevels},
-    'CustomConsole' => {'loglevels' => ['INFO', 'WARN', 'ERROR']},
-    'Blabber::Campfire' => {
-        'account' => 'campfireaccount', 
-        'token' => 'abc123', 
-        'room' => 'My Room',
-        'loglevels' => ['INFO', 'WARN', 'ERROR', 'DEBUG', 'CAMPFIRE']
-    })
+    'CustomConsole' => {'loglevels' => ['INFO', 'WARN', 'ERROR']}
+)
 
 blabber.debug("debug msg")
 blabber.info("info msg")
@@ -54,5 +49,8 @@ blabber.debug("multiline\nmessage")
 blabber.campfire("just to campfire")
 ```
 
-### Credits
-@benfollis
+## Channels
+* [Blabber-Campfire](https://github.com/ppicazo/blabber-campfire) - Campfire channel
+
+## Credits
+[@benfollis](https://github.com/benfollis)

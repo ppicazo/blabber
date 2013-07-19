@@ -3,6 +3,8 @@ Blabber
 
 Blabber helps us monitor long running jobs without having to watch them in the terminal.
 
+[![Build Status](https://travis-ci.org/ppicazo/blabber.png)](https://travis-ci.org/ppicazo/blabber)
+
 ## Installation
 
 ```

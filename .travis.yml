@@ -4,3 +4,4 @@ rvm:
 install:
   - gem install rake
   - gem install minitest
+  - gem install coveralls
